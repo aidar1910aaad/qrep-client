@@ -4,9 +4,13 @@ import styled from "styled-components"
 import {Search, ShoppingCartOutlined} from "@material-ui/icons";
 import {useSelector} from "react-redux";
 import {Link} from "react-router-dom";
+import {mobile} from "../responsive";
 
 const Container = styled.div`
   height: 60px;
+  ${mobile({
+    height: "50px"
+  })}
 `;
 
 const Wrapper = styled.div`
@@ -14,6 +18,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  ${mobile({padding: "10px 0px"})}
 `
 
 const Left = styled.div`
@@ -29,6 +34,7 @@ const Center = styled.div`
 const Language = styled.span`
   font-size: 14px;
   cursor: pointer;
+  ${mobile({display: "none"})}
 `;
 
 const SearchContainer = styled.div`
@@ -42,16 +48,22 @@ const SearchContainer = styled.div`
 const Logo = styled.h1`
   font-weight: bold;
   text-align: center;
+  ${mobile({fontSize: "24px"})}
 `
 
 const MenuItem = styled.div`
   font-size: 14px;
   cursor: pointer;
   margin-left: 25px;
+  text-decoration: none;
+  color: black;
+  
+  ${mobile({fontSize: "12px", marginLeft: "10px"})}
 `
 
 const  Input = styled.input`
   border: none;
+  ${mobile({width: "50px"})}
 `;
 
 const Right = styled.div`
@@ -59,7 +71,10 @@ const Right = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  ${mobile({flex: "2", justifyContent: "center"})}
 `;
+
+
 
 const Navbar = () => {
     const quantity = useSelector(state => state.cart.quantity)
@@ -71,7 +86,7 @@ const Navbar = () => {
                         EN
                     </Language>
                     <SearchContainer>
-                        <Input/>
+                        <Input placeholder = "Search"/>
                         <Search style={{color: "gray", fontSize: 16}}/>
                     </SearchContainer>
                 </Left>
@@ -79,8 +94,12 @@ const Navbar = () => {
                     <Logo>QREP</Logo>
                 </Center>
                 <Right>
-                    <MenuItem>REGISTER</MenuItem>
-                    <MenuItem>SIGN IN</MenuItem>
+                    <Link to = "/register">
+                        <MenuItem>REGISTER</MenuItem>
+                    </Link>
+                    <Link to = "/login">
+                        <MenuItem>SIGN IN</MenuItem>
+                    </Link>
                     <Link to = "/cart">
                     <MenuItem>
                         <Badge badgeContent={quantity} color="primary">

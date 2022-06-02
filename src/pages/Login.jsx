@@ -3,6 +3,8 @@ import React, {useState} from "react";
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {login} from "../redux/apiCalls";
+import {mobile} from "../responsive";
+import Navbar from "../components/Navbar";
 
 const Container = styled.div`
   width: 100vw;
@@ -23,6 +25,7 @@ const Wrapper = styled.div`
   padding: 20px;
   width: 25%;
   background-color: #fff;
+  ${mobile({width: "75%"})}
 `;
 
 const Form = styled.form`
@@ -69,6 +72,7 @@ const Login = () => {
         login(dispatch, { username, password });
     };
     return(
+
         <Container>
             <Wrapper>
                 <Title>Sign In</Title>
