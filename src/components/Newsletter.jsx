@@ -57,7 +57,7 @@ const Newsletter = () => {
                 News about shop
             </Title>
             <Description>
-                Lorem ipsum dolor sit amet, consectetur
+                Subscribe to news
             </Description>
             <InputContainer>
                 <Input placeholder="Your email"/>

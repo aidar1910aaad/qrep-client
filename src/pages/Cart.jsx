@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Announcement from "../components/Announcement";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -6,6 +6,11 @@ import styled from "styled-components";
 import {Add, Remove} from "@material-ui/icons";
 import {useSelector} from "react-redux";
 import {mobile} from "../responsive";
+import StripeCheckout from "react-stripe-checkout";
+import {userRequest} from "../requestMethods";
+import {Link, useHistory} from "react-router-dom";
+
+const KEY = "pk_test_51L2kpVJ5bIFy8eESUYajmwqSUxKk0Rjn4ZrhARXEXfIORdySTEFsTYLwdDvyKEPYR5noFDKiKaaEwqzUUdiZovJY00KuDn76cz"
 
 const Container = styled.div`
   
@@ -168,6 +173,25 @@ const SummaryButton = styled.button`
 
 const Cart = () => {
     const cart = useSelector(state => state.cart)
+    const [stripeToken, setStripeToken] = useState(null)
+    const history = useHistory()
+    const quantity = useSelector(state => state.cart.quantity)
+    const onToken = (token)=>{
+        setStripeToken(token);
+    }
+    useEffect(() => {
+        const makeRequest = async ()=>{
+            try {
+                const res = await userRequest.post("/checkout/payment", {
+                    tokenId: stripeToken.id,
+                    amount: cart.total * 100,
+                });
+                history.push("/success", {data:res.data});
+            }catch {}
+        };
+        stripeToken && makeRequest();
+    }, [stripeToken, cart.total, history]);
+    
     return(
         <Container>
             <Announcement/>
@@ -177,14 +201,14 @@ const Cart = () => {
                     Bag
                 </Title>
                 <Top>
+                    <Link to="/">
                     <TopButton>Continue shopping</TopButton>
+                    </Link>
                     <TopTexts>
                         <TopText>
-                            Shopping Bag(2)
+                            Shopping Bag({quantity})
                         </TopText>
-                        <TopText>
-                            Wishlist
-                        </TopText>
+
                     </TopTexts>
                     <TopButton type="filled">Checkout now</TopButton>
                 </Top>
@@ -227,7 +251,7 @@ const Cart = () => {
                                 Subtotal
                             </SummaryItemText>
                             <SummaryItemPrice>
-                                $55
+                                $0
                             </SummaryItemPrice>
                         </SummaryItem>
                         <SummaryItem type="total">
@@ -238,7 +262,17 @@ const Cart = () => {
                                 {cart.total}
                             </SummaryItemPrice>
                         </SummaryItem>
+                        <StripeCheckout
+                            name="QREP SHOP"
+                            image=""
+                            billingAddress
+                            shippingAddress
+                            description={`Your total is $${cart.total}`}
+                            amount={cart.total*100}
+                            token={onToken}
+                            stripeKey={KEY}>
                         <SummaryButton>Checkout now</SummaryButton>
+                        </StripeCheckout>
                     </Summary>
                 </Bottom>
             </Wrapper>

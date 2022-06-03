@@ -173,16 +173,7 @@ const Product = () =>{
                     <Desc>{product.desc}</Desc>
                     <Price>${product.price}</Price>
                     <FilterContainer>
-                        <Filter>
-                            <FilterTitle>Color</FilterTitle>
 
-                        </Filter>
-                        <Filter>
-                            <FilterTitle>Size</FilterTitle>
-                            <FilterSize onChange={(e) => setSize(e.target.value)}>
-
-                            </FilterSize>
-                        </Filter>
                     </FilterContainer>
                     <AddContainer>
                         <AmountContainer>

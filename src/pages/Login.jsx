@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {login} from "../redux/apiCalls";
 import {mobile} from "../responsive";
 import Navbar from "../components/Navbar";
+import {Error} from "@material-ui/icons";
 
 const Container = styled.div`
   width: 100vw;
@@ -90,6 +91,7 @@ const Login = () => {
                     <Button onClick={handleClick} disabled={isFetching}>
                         LOGIN
                     </Button>
+                    <Error>Something went wrong</Error>
                     <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>
                     <Link>CREATE A NEW ACCOUNT</Link>
                 </Form>

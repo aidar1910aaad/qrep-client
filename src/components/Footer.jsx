@@ -83,7 +83,7 @@ const Footer = () => {
         <Left>
             <Logo>QREP.</Logo>
             <Desc>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque mollitia, nemo odit officiis tempora voluptates.
+                Online Shop
             </Desc>
             <SocialContainer>
                 <SocialIcon color="1d2b4b">
@@ -113,9 +113,6 @@ const Footer = () => {
                 </ListItem>
                 <ListItem>
                     Woman
-                </ListItem>
-                <ListItem>
-                    My account
                 </ListItem>
                 <ListItem>
                     Order Tracking
