@@ -191,7 +191,20 @@ const Cart = () => {
         };
         stripeToken && makeRequest();
     }, [stripeToken, cart.total, history]);
-    
+
+    console.log(JSON.stringify(cart))
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        fetch("https://qrep-api.herokuapp.com/api/carts/", {
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(cart)
+        }).then(() => {
+            console.log("cart added")
+        })
+    }
+
     return(
         <Container>
             <Announcement/>
@@ -270,8 +283,11 @@ const Cart = () => {
                             description={`Your total is $${cart.total}`}
                             amount={cart.total*100}
                             token={onToken}
-                            stripeKey={KEY}>
-                        <SummaryButton>Checkout now</SummaryButton>
+                            stripeKey={KEY}
+                            onClick={handleClick}
+                        >
+
+                        <SummaryButton onClick={handleClick}>Checkout now</SummaryButton>
                         </StripeCheckout>
                     </Summary>
                 </Bottom>
