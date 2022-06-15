@@ -19,7 +19,7 @@ const Products = ({ cat, filters, sort }) => {
     useEffect(() => {
         const getProducts = async () => {
             try {
-                const res = await axios.get("https://qrep-api.herokuapp.com/api/products"
+                const res = await axios.get("https://qrep-api-2.herokuapp.com/api/products"
                 );
                 setProducts(res.data);
             }

@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import styled from "styled-components";
 import {mobile} from "../responsive";
 import {useDispatch, useSelector} from "react-redux";
-import {login, register} from "../redux/apiCalls";
+import {register} from "../redux/apiCalls";
 
 const Container = styled.div`
   width: 100vw;

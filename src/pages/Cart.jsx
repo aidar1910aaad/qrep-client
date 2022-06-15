@@ -196,7 +196,7 @@ const Cart = () => {
 
     const handleClick = (e) => {
         e.preventDefault();
-        fetch("https://qrep-api.herokuapp.com/api/carts/", {
+        fetch("https://qrep-api-2.herokuapp.com/api/carts/", {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(cart)
